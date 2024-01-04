@@ -852,7 +852,7 @@ Quest quest_1(Hero& character, Monster& monsters)
             {
                 cout << "\n\nIn the mystical land of Terraria, hidden deep within the Celestial Glades, roams a herd of radiant unicorns,\n"
                     "guardians of the purest magic in the realm. These unicorns, adorned with resplendent coats that shimmer like\n"
-                    "the evening sky, are the keepers of the legendary Crystal Grove—a sacred place where crystalline flora emanate\n"
+                    "the evening sky, are the keepers of the legendary Crystal Groveâ€”a sacred place where crystalline flora emanate\n"
                     "a magic that has sustained Terraria for centuries.";
                 gainExperience(character, 25);
             }
@@ -1189,7 +1189,7 @@ Quest quest2(Hero& character, Monster& monsters)
                 string scrambled_word = target_word;
 
 
-                random_shuffle(scrambled_word.begin(), scrambled_word.end());
+                random_shuffle(scrambled_word.begin(), scrambled_word.end()); // algorithm header file used
 
 
                 cout << "\nHere comes the next challenge: ";
@@ -1608,14 +1608,14 @@ Quest quest3(Hero& character, Monster& monsters)
         "emerges, fueled by the desire to unravel the mysteries that have haunted Teraxia"
         " for generations.";
 
-    cout << "\nPress Enter to continue: ";
+    cout << "\n-> Press Enter to continue: ";
     cin.get();
-    cin.ignore();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
     cout << "\nOur hero sets out on their journey, asking the local townsfolk for the\n"
         "direction of the Forbidden Temple. Although extremely warned by all people\n"
         "our hero remains resilient and devotes their life to exposing the mystery of the\n"
         "Forbidden Temple";
-    cout << "\nPress Enter to continue: ";
+    cout << "\n-> Press Enter to continue: ";
     getline(cin, dummy);
 
     cout << "\nAfter entering the forest which faced heavy rain, it was filled with puddles of\n"
@@ -1624,7 +1624,7 @@ Quest quest3(Hero& character, Monster& monsters)
         "make a choice which path to choose.";
     char path_choice;
     bool rightPath;
-    cout << "\nWhich path do you want to pick, Left or Right (L/R): ";
+    cout << "\n-> Which path do you want to pick, Left or Right (L/R): ";
     do {
         cin >> path_choice;
         if (path_choice == 'L' || path_choice == 'l') {
@@ -1658,25 +1658,29 @@ Quest quest3(Hero& character, Monster& monsters)
 
         char decision;
         bool willFight;
-        cout << "\nWhat will our hero do? Choose C to confront or S to sneak: ";
+        cout << "\n\n-> What will our hero do? Choose C to confront or S to sneak: ";
         do
         {
             cin >> decision;
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
             if (decision == 'C' || decision == 'c') {
-                cout << "\nOur hero bravely confronts the creature, ready for a battle!";
+                cout << "\n-> Our hero bravely confronts the creature, ready for a battle!";
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 willFight = true;
                 break;
             }
             else if (decision == 'S' || decision == 's') {
-                cout << "\nOur hero decides to take a stealthy approach, attempting to sneak past the creature.";
+                cout << "\n-> Our hero decides to take a stealthy approach, attempting to sneak past the creature.";
+                 cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 willFight = false;
                 break;
             }
             else
             {
-                cout << "Invalid choice. Please select either C or S: ";
+                cout << "-> Invalid choice. Please select either C or S: ";
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
             }
@@ -1703,8 +1707,8 @@ Quest quest3(Hero& character, Monster& monsters)
                         cout << "\nExiting to main menu...";
                         return result;
                     }
-                    cout << "\nYou can try again! Attempt: " << battleAttempts << "/2";
-                    cout << "\nPress Enter to continue: ";
+                    cout << "\n-> You can try again! Attempt: " << battleAttempts << "/2";
+                    cout << "\n-> Press Enter to continue: ";
                     cin.get();
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
                     monsters.monsterHealth = 200; // Reset monster health for a new battle
@@ -1721,7 +1725,7 @@ Quest quest3(Hero& character, Monster& monsters)
                 }
             } while (retryBattle);
 
-            cout << "\nPress Enter to continue: ";
+            cout << "\n-> Press Enter to continue: ";
             cin.get();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             system("cls");
@@ -1729,7 +1733,7 @@ Quest quest3(Hero& character, Monster& monsters)
             cout << "\n\nOur hero finally arrives at the Forbidden Temple. Massive in size\n"
                 "our hero stops to gaze at its millenia old structure. With determination\n"
                 "our hero enters the Temple through a narrow door.";
-            cout << "\nPress Enter to continue: ";
+            cout << "\n-> Press Enter to continue: ";
             cin.get();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
@@ -1743,8 +1747,8 @@ Quest quest3(Hero& character, Monster& monsters)
 
             cout << "\n\nIn order to solve this puzzle, our hero must answer all three\n"
                 "of the riddles posed before us carved on the wall!";
-            cout << "\nThere are only 2 chances, otherwise our hero will be killed!";
-            cout << "\nPress Enter to continue: ";
+            cout << "\n-> There are only 2 chances, otherwise our hero will be killed!";
+            cout << "\n-> Press Enter to continue: ";
             cin.get();
             string riddleguess1, riddleguess2, riddleguess3;
             cout << "Here goes the first riddle!";
@@ -1755,10 +1759,11 @@ Quest quest3(Hero& character, Monster& monsters)
                     "I have no body, but I come alive with the wind\n"
                     "What am I? : \033[0m";
                 cin >> riddleguess1;
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 if (riddleguess1 == "Echo" || riddleguess1 == "echo")
                 {
                     cout << "You guessed it!";
-                    cout << "\nHere comes the second riddle! ";
+                    cout << "\n-> Here comes the second riddle! ";
                     cout << "\n\n\033[3m#2: I'm tall when I'm young, and short when I'm old.\n"
                         "What am I? (Hint: a object): \033[0m";
                     cin >> riddleguess2;
@@ -1772,7 +1777,7 @@ Quest quest3(Hero& character, Monster& monsters)
                         cin >> riddleguess3;
                         if (riddleguess3 == "Fire" || riddleguess3 == "fire")
                         {
-                            cout << "\nYou guessed all of riddles!";
+                            cout << "\n-> You guessed all of riddles!";
                             break;
                         }
                         else
@@ -1780,12 +1785,12 @@ Quest quest3(Hero& character, Monster& monsters)
                             riddle_chances--;
                             if (riddle_chances == 0)
                             {
-                                cout << "\nYou lost the puzzle. Exiting to main menu...";
+                                cout << "\n-> You lost the puzzle. Exiting to main menu...";
                                 cin.get();
                                 return result;
                             }
-                            cout << "Wrong answer! Try again.";
-                            cout << "\nYou have one last chance!" << endl;
+                            cout << "-> Wrong answer! Try again.";
+                            cout << "\n-> You have one last chance!" << endl;
                             system("pause");
                             continue;
                         }
@@ -1795,11 +1800,11 @@ Quest quest3(Hero& character, Monster& monsters)
                         riddle_chances--;
                         if (riddle_chances == 0)
                         {
-                            cout << "\nYou lost the puzzle. Exiting to main menu...";
+                            cout << "\n-> You lost the puzzle. Exiting to main menu...";
                             return result;
                         }
-                        cout << "Wrong answer! Try again.";
-                        cout << "\nYou have one last chance!" << endl;
+                        cout << "-> Wrong answer! Try again.";
+                        cout << "\n-> You have one last chance!" << endl;
                         system("pause");
                         continue;
                     }
@@ -1809,11 +1814,11 @@ Quest quest3(Hero& character, Monster& monsters)
                     riddle_chances--;
                     if (riddle_chances == 0)
                     {
-                        cout << "\nYou lost the puzzle. Exiting to main menu...";
+                        cout << "\n-> You lost the puzzle. Exiting to main menu...";
                         return result;
                     }
-                    cout << "Wrong answer! Try again.";
-                    cout << "\nYou have one last chance!" << endl;
+                    cout << "-> Wrong answer! Try again.";
+                    cout << "\n-> You have one last chance!" << endl;
                     system("pause");
                     continue;
                 }
@@ -1825,11 +1830,11 @@ Quest quest3(Hero& character, Monster& monsters)
                 "our hero senses that they are nearing the heart of the temple's secrets.";
 
             char story_choice;
-            cout << "\n\nDo you want to know the backstory of the Forbidden temple? (bonus xp): ";
+            cout << "\n\n-> Do you want to know the backstory of the Forbidden temple? (bonus xp): ";
             cin >> story_choice;
             if (story_choice == 'y' || story_choice == 'Y')
             {
-                cout << "\nIn the heart of Teraxia, an ancient land veiled in mystery, stands the Forbidden Temple—a relic of forgotten power.\n"
+                cout << "\nIn the heart of Teraxia, an ancient land veiled in mystery, stands the Forbidden Templeâ€”a relic of forgotten power.\n"
                     "Once tended by the Eldarans, a civilization attuned to magic and nature, the temple now whispers secrets lost to time.";
 
                 cout << "\n\nLegends speak of an artifact within, the Heartstone, a crystal pulsating with the essence of the land. Guarded\n"
@@ -1894,7 +1899,7 @@ Quest quest3(Hero& character, Monster& monsters)
                 "Stunned by its elegant design, our hero suddenly spots a flashing red light in the distance. Upon\n"
                 "further look, it revealed to be the Legendary Heartstone!";
 
-            cout << "\n\nPress Enter to continue: ";
+            cout << "\n\n-> Press Enter to continue: ";
             cin.get();
             cin.ignore();
 
@@ -1903,7 +1908,7 @@ Quest quest3(Hero& character, Monster& monsters)
                 "behind the disapperances happening in the Forbidden Temple. He will try his most to stop our hero from\n"
                 "taking the HeartStone. We must defeat him!";
 
-            cout << "\nPress Enter to continue: ";
+            cout << "\n-> Press Enter to continue: ";
             cin.get();
             do
             {
@@ -1920,14 +1925,14 @@ Quest quest3(Hero& character, Monster& monsters)
             } while (true);
 
         }
-        cout << "\nPress Enter to continue...";
+        cout << "\n-> Press Enter to continue...";
         cin.get();
 
         cout << "\n\nAfter finally defeating the Guardian Temple, our hero grabs the Heartstone\n"
             "still surprised by its unreal mystic aura. With the Heartstone, our hero sets\n"
             "back to their home, impatient to tell the whole town what had happened.";
         gainExperience(character, 400);
-        cout << "\nPress Enter to exit the quest...";
+        cout << "\n-> Press Enter to exit the quest...";
         cin.get();
         return result;
     }
@@ -1941,16 +1946,15 @@ Quest quest3(Hero& character, Monster& monsters)
             "ruin covered in vines and moss. The ruins emanate a strange energy, and our hero feels\n"
             "compelled to explore further.";
 
-        cout << "\nPress Enter to continue: ";
+        cout << "\n-> Press Enter to continue: ";
         cin.get();
         cin.ignore();
         cout << "\nInside the ruins, our hero discovers a series of chambers adorned with faded murals\n"
             "depicting a forgotten civilization. The walls tell a tale of a once-prosperous society that\n"
             "worshipped nature and magic. However, a dark force had descended upon them, leading to\n"
             "their downfall.";
-        cout << "\nPress Enter to continue: ";
         cin.get();
-        cin.ignore();
+        
         cout << "\n\nAs our hero delves deeper into the ruins, they come across a mysterious altar at the center\n"
             "of a grand chamber. On the altar, three elemental orbs are placed - Fire, Water, and Earth.";
 
@@ -1968,20 +1972,20 @@ Quest quest3(Hero& character, Monster& monsters)
         } while (true);
         cout << "\nAfter sorting the challenge, another one comes in the path. Our hero must solve some logical\n"
             "questions. There are 3 in total!";
-        cout << "\nPress Enter to continue: ";
+        cout << "\n-> Press Enter to continue: ";
         cin.get();
         cin.ignore();
         int answer;
         int lives = 3;
-        cout << "\nHere comes the first challenge: ";
-        cout << "\n\nWhat is the next number in the sequence 2, 3, 5, 8, 13";
-        cout << "\n->State your answer: ";
+        cout << "\n-> Here comes the first challenge: ";
+        cout << "\n\n-> What is the next number in the sequence 2, 3, 5, 8, 13";
+        cout << "\n->-> State your answer: ";
         cin >> answer;
         if (answer == 21)
         {
             cout << "\nYou got the first correct!";
             cout << "\nHere comes the second riddle.";
-            cout << "\n->What is 7 x 7 – 7 + 7 ?";
+            cout << "\n->What is 7 x 7 â€“ 7 + 7 ?";
             cout << "\n->State your answer: ";
             cin >> answer;
             if (answer == 49)
@@ -2035,7 +2039,7 @@ Quest quest3(Hero& character, Monster& monsters)
             "Stunned by its elegant design, our hero suddenly spots a flashing red light in the distance. Upon\n"
             "further look, it revealed to be the Legendary Heartstone!";
 
-        cout << "\n\nPress Enter to continue: ";
+        cout << "\n\n-> Press Enter to continue: ";
         cin.get();
         cin.ignore();
 
@@ -2044,7 +2048,7 @@ Quest quest3(Hero& character, Monster& monsters)
             "behind the disapperances happening in the Forbidden Temple. He will try his most to stop our hero from\n"
             "taking the HeartStone. We must defeat him!";
 
-        cout << "\nPress Enter to continue: ";
+        cout << "\n-> Press Enter to continue: ";
         cin.get();
         do
         {
@@ -2061,14 +2065,14 @@ Quest quest3(Hero& character, Monster& monsters)
         } while (true);
 
     }
-    cout << "\nPress Enter to continue...";
+    cout << "\n-> Press Enter to continue...";
     cin.get();
 
     cout << "\n\nAfter finally defeating the Guardian Temple, our hero grabs the Heartstone\n"
         "still surprised by its unreal mystic aura. With the Heartstone, our hero sets\n"
         "back to their home, impatient to tell the whole town what had happened.";
     gainExperience(character, 400);
-    cout << "\nPress Enter to exit the quest...";
+    cout << "\n-> Press Enter to exit the quest...";
     cin.get();
     return result;
 }
