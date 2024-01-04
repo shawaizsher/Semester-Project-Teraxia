@@ -1,11 +1,11 @@
 #include<iostream>
 #include<string>
-#include<stdlib.h>
-#include<time.h>
-#include<iomanip>
-#include<limits>
-#include<cctype>
-#include<algorithm>
+#include<stdlib.h>  //Stores random function
+#include<time.h>    //Initializes time seed
+#include<iomanip>   //Used for spaces (setw)
+#include<limits>    //It considers the first character and ignore the characters till next line
+#include<cctype>    //Used to check alpha, numeric characters
+#include<algorithm> //Used for string operations like random shuffles
 using namespace std;
 int globalColor; // global variable
 struct Hero
@@ -928,7 +928,7 @@ Quest quest_1(Hero& character, Monster& monsters)
             {
                 cout << "\n\nIn the mystical land of Terraria, hidden deep within the Celestial Glades, roams a herd of radiant unicorns,\n"
                     "guardians of the purest magic in the realm. These unicorns, adorned with resplendent coats that shimmer like\n"
-                    "the evening sky, are the keepers of the legendary Crystal Grove—a sacred place where crystalline flora emanate\n"
+                    "the evening sky, are the keepers of the legendary Crystal GroveÂ—a sacred place where crystalline flora emanate\n"
                     "a magic that has sustained Terraria for centuries.";
                 gainExperience(character, 25);
             }
@@ -1909,7 +1909,7 @@ Quest quest3(Hero& character, Monster& monsters)
             cin >> story_choice;
             if (story_choice == 'y' || story_choice == 'Y')
             {
-                cout << "\nIn the heart of Teraxia, an ancient land veiled in mystery, stands the Forbidden Temple—a relic of forgotten power.\n"
+                cout << "\nIn the heart of Teraxia, an ancient land veiled in mystery, stands the Forbidden TempleÂ—a relic of forgotten power.\n"
                     "Once tended by the Eldarans, a civilization attuned to magic and nature, the temple now whispers secrets lost to time.";
 
                 cout << "\n\nLegends speak of an artifact within, the Heartstone, a crystal pulsating with the essence of the land. Guarded\n"
@@ -2086,7 +2086,7 @@ Quest quest3(Hero& character, Monster& monsters)
         {
             cout << "\nYou got the first correct!";
             cout << "\nHere comes the second riddle.";
-            cout << "\n->What is 7 x 7 – 7 + 7 ?";
+            cout << "\n->What is 7 x 7 Â– 7 + 7 ?";
             cout << "\n->State your answer: ";
             cin >> answer;
             if (answer == 49)
