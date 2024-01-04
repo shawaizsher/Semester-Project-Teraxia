@@ -39,7 +39,6 @@ struct Quest
 };
 
 void setColor(int colorCode);
-void resetColor();
 int chooseColor();
 void setGameColor();
 void displayInstructions();
@@ -157,12 +156,6 @@ void setColor(int colorCode)
     cout << "\033[" << colorCode << "m";
     cin.get();
 }
-
-void resetColor()
-{
-    cout << "\033[0m";
-}
-
 int chooseColor()
 {
     int colorChoice;
@@ -204,7 +197,7 @@ int chooseColor()
     default:
     {
         cout << "Invalid input, try again...." << endl;
-        cin.clear();
+        cin.clear(); //remove error flags
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
         return chooseColor();
     }
@@ -294,7 +287,7 @@ Hero initializeCharacters()
             else
             {
                 cout << "\n-> Please enter username again: ";
-                cin.clear();
+                cin.clear(); //Removes error flags
                 cin.ignore(INT_MAX, '\n');
             }
         }
@@ -469,7 +462,7 @@ void displayInventory(Hero& character)
     }
     else
     {
-        for (int i = 0; i < character.inventorySize; ++i)
+        for (int i = 0; i < character.inventorySize;i++)
         {
             cout << i + 1 << ". " << character.inventory[i] << "\n";
         }
@@ -1259,7 +1252,6 @@ Quest quest2(Hero& character, Monster& monsters)
             if (guess_sentence == "teraxia" || guess_sentence == "Teraxia")
             {
                 cout << "\nYou succesfully passed the first challenge.";
-                // put gain experience here
                 cout << "\nIt is time for the last challenge: " << endl;
                 system("pause");
                 string target_word = "death";
