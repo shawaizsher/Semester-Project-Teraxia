@@ -852,7 +852,7 @@ Quest quest_1(Hero& character, Monster& monsters)
             {
                 cout << "\n\nIn the mystical land of Terraria, hidden deep within the Celestial Glades, roams a herd of radiant unicorns,\n"
                     "guardians of the purest magic in the realm. These unicorns, adorned with resplendent coats that shimmer like\n"
-                    "the evening sky, are the keepers of the legendary Crystal Grove—a sacred place where crystalline flora emanate\n"
+                    "the evening sky, are the keepers of the legendary Crystal Groveâ€”a sacred place where crystalline flora emanate\n"
                     "a magic that has sustained Terraria for centuries.";
                 gainExperience(character, 25);
             }
@@ -1834,7 +1834,7 @@ Quest quest3(Hero& character, Monster& monsters)
             cin >> story_choice;
             if (story_choice == 'y' || story_choice == 'Y')
             {
-                cout << "\nIn the heart of Teraxia, an ancient land veiled in mystery, stands the Forbidden Temple—a relic of forgotten power.\n"
+                cout << "\nIn the heart of Teraxia, an ancient land veiled in mystery, stands the Forbidden Templeâ€”a relic of forgotten power.\n"
                     "Once tended by the Eldarans, a civilization attuned to magic and nature, the temple now whispers secrets lost to time.";
 
                 cout << "\n\nLegends speak of an artifact within, the Heartstone, a crystal pulsating with the essence of the land. Guarded\n"
@@ -1878,7 +1878,7 @@ Quest quest3(Hero& character, Monster& monsters)
             cout << "\n\nAs our hero progresses deeper into the temple, they encounter a chamber with three pedestals,\n"
                 "each representing an element - Fire, Water, and Earth. Enigmatic inscriptions on the walls provide\n"
                 "a clue - \"Balance is the key to unlocking the path\" ";
-
+         
             cout << "\n\nOur hero is tasked with placing three elemental orbs in three elemental pedestals, making balance" << endl;
             system("pause");
 
@@ -1901,7 +1901,8 @@ Quest quest3(Hero& character, Monster& monsters)
 
             cout << "\n\n-> Press Enter to continue: ";
             cin.get();
-            cin.ignore();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
 
             cout << "\n\nAs our hero approached to touch the Heartstone, they heard a noise behind the chamber. It revealed\n"
                 "to be a mysterious figure robed in a Black Cloak. This must be the infamous Guardian Temple and is\n"
@@ -1948,13 +1949,14 @@ Quest quest3(Hero& character, Monster& monsters)
 
         cout << "\n-> Press Enter to continue: ";
         cin.get();
-        cin.ignore();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cout << "\nInside the ruins, our hero discovers a series of chambers adorned with faded murals\n"
             "depicting a forgotten civilization. The walls tell a tale of a once-prosperous society that\n"
             "worshipped nature and magic. However, a dark force had descended upon them, leading to\n"
-            "their downfall.";
+            "their downfall... ";
         cin.get();
-        
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
         cout << "\n\nAs our hero delves deeper into the ruins, they come across a mysterious altar at the center\n"
             "of a grand chamber. On the altar, three elemental orbs are placed - Fire, Water, and Earth.";
 
@@ -1974,67 +1976,92 @@ Quest quest3(Hero& character, Monster& monsters)
             "questions. There are 3 in total!";
         cout << "\n-> Press Enter to continue: ";
         cin.get();
-        cin.ignore();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         int answer;
         int lives = 3;
         cout << "\n-> Here comes the first challenge: ";
-        cout << "\n\n-> What is the next number in the sequence 2, 3, 5, 8, 13";
-        cout << "\n->-> State your answer: ";
-        cin >> answer;
-        if (answer == 21)
-        {
-            cout << "\nYou got the first correct!";
-            cout << "\nHere comes the second riddle.";
-            cout << "\n->What is 7 x 7 – 7 + 7 ?";
-            cout << "\n->State your answer: ";
-            cin >> answer;
-            if (answer == 49)
-            {
-                cout << "\nYou got the second correct!";
-                cout << "\nHere comes the last riddle.";
-                cout << "\nWhat is half of two plus two?";
-                cout << "\n->State your answer: ";
-                cin >> answer;
-                if (answer == 3)
-                {
-                    cout << "\nYou guessed all the riddles!";
-                }
-                else
-                {
-                    lives--;
-                    if (lives == 0)
-                    {
-                        cout << "\nYou died from the trap!";
-                        return result;
-                    }
-                    cout << "Incorrect. You lost a chance!";
-                    cout << "You have " << lives << "lives left!";
-                }
-            }
-            else
-            {
-                lives--;
-                if (lives == 0)
-                {
-                    cout << "\nYou died from the trap!";
-                    return result;
-                }
-                cout << "Incorrect. You lost a chance!";
-                cout << "You have " << lives << "lives left!";
-            }
+    cout << "\n\n-> What is the next number in the sequence 2, 3, 5, 8, 13";
+    cout << "\n->-> State your answer: ";
 
+    if (!(cin >> answer)) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "Invalid input. Please enter a valid integer: ";
+    }
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    if (answer == 21)
+	 {
+        cout << "\nYou got the first correct!";
+    } 
+	else
+	 {
+        lives--;
+        if (lives == 0) 
+		{
+            cout << "\nYou died from the trap!";
+           
         }
-        else
-        {
-            lives--;
-            if (lives == 0)
-            {
-                cout << "\nYou died from the trap!";
-                return result;
-            }
-            cout << "Incorrect. You lost a chance!";
-            cout << "You have " << lives << "lives left!";
+        cout << "\nIncorrect. You lost a chance!";
+        cout << "\nYou have " << lives << " lives left!";
+    }
+
+    // Second Challenge
+    cout << "\nHere comes the second riddle.";
+    cout << "\n-> What is 7 x 7 - 7 + 7 ?";
+    cout << "\n-> State your answer: ";
+
+    if (!(cin >> answer)) 
+	{
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "Invalid input. Please enter a valid integer: ";
+    }
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    if (answer == 49)
+	 {
+        cout << "\nYou got the second correct!";
+    } 
+	else
+	 {
+        lives--;
+        if (lives == 0) 
+		{
+            cout << "\nYou died from the trap!";
         }
+        cout << "\nIncorrect. You lost a chance!";
+        cout << "\nYou have " << lives << " lives left!";
+    }
+
+    
+    cout << "\nHere comes the last riddle.";
+    cout << "\nWhat is half of two plus two?";
+    cout << "\n-> State your answer: ";
+
+    if (!(cin >> answer)) 
+	{
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "Invalid input. Please enter a valid integer: ";
+    }
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    if (answer == 3)
+	 {
+        cout << "\nYou guessed all the riddles!";
+    } 
+	else 
+	{
+        lives--;
+        if (lives == 0)
+		 {
+            cout << "\nYou died from the trap!";
+        
+        }
+        cout << "\nIncorrect. You lost a chance!";
+        cout << "\nYou have " << lives << " lives left!";
+       }
         cout << "\nAfter passing through the chamber, our hero finally reaches in the inner chambers of the temple\n"
             "Stunned by its elegant design, our hero suddenly spots a flashing red light in the distance. Upon\n"
             "further look, it revealed to be the Legendary Heartstone!";
@@ -2043,7 +2070,7 @@ Quest quest3(Hero& character, Monster& monsters)
         cin.get();
         cin.ignore();
 
-        cout << "\n\nAs our hero approached to touch the Heartstone, they heard a noise behind the chamber. It revealed\n"
+        cout << "\nAs our hero approached to touch the Heartstone, they heard a noise behind the chamber. It revealed\n"
             "to be a mysterious figure robed in a Black Cloak. This must be the infamous Guardian Temple and is\n"
             "behind the disapperances happening in the Forbidden Temple. He will try his most to stop our hero from\n"
             "taking the HeartStone. We must defeat him!";
@@ -2357,6 +2384,9 @@ bool puzzle_3(Hero& character)
         if (orbIndex < 1 || orbIndex > 3 || pedestalIndex < 1 || pedestalIndex > 3)
         {
             cout << "Invalid input. Try again." << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
             continue;
         }
 
