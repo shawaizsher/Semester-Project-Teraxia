@@ -324,7 +324,7 @@ Hero initializeCharacters()
     {
         confirmation_choice = 'N';
         cin >> class_choice;
-        if (!(class_choice == 1 || class_choice == 2 || class_choice == 3 || class_choice == 4)) // invalid input if the entered digit is not either 1,2,3
+        if (!(class_choice == 1 || class_choice == 2 || class_choice == 3)) // invalid input if the entered digit is not either 1,2,3
         {
             cout << "Invalid input, Please try again: ";
             cin.clear();
@@ -662,7 +662,7 @@ Quest quest_1(Hero& character, Monster& monsters)
         system("pause");
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-        
+
         cout << "\nAfter take guidance from the stranger, our Hero finally make their way out of the Forbidden Forest\n"
             "Soon after leaving the Forest, our Hero spots a strange bunker. Out of curiosity, our Hero enters the temple\n"
             "Not later, our Hero realizes it's a trap laid by the Leviathans!";
@@ -937,7 +937,7 @@ Quest quest_1(Hero& character, Monster& monsters)
             {
                 cout << "\n\nIn the mystical land of Terraria, hidden deep within the Celestial Glades, roams a herd of radiant unicorns,\n"
                     "guardians of the purest magic in the realm. These unicorns, adorned with resplendent coats that shimmer like\n"
-                    "the evening sky, are the keepers of the legendary Crystal Grovea sacred place where crystalline flora emanate\n"
+                    "the evening sky, are the keepers of the legendary Crystal GroveÂa sacred place where crystalline flora emanate\n"
                     "a magic that has sustained Terraria for centuries.";
                 gainExperience(character, 25);
             }
@@ -1246,7 +1246,7 @@ Quest quest2(Hero& character, Monster& monsters)
     {
         cout << "\nOur hero picks the confrontation choice...";
         cin.get();
-        cin.ignore();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cout << "\nAfter picking confrontation, our hero makes way making themselves ready for a big battle\n"
             "Suddenly, a stray Bandit catches our hero by off-guard. The Bandit is armed seems to kill\n"
             "our hero, unless we solve the challenges posed by the bandit.";
@@ -1289,6 +1289,12 @@ Quest quest2(Hero& character, Monster& monsters)
                 if (user_unscrambled_word == target_word)
                 {
                     cout << "Bandit: Impressive! You've unscrambled the word correctly.\n";
+                    cout << "\nAfter guessing all the challenges, the bandit spares our life and also guides our hero\n"
+                        "to Bandit hideout. As a weird gesture, the bandit gives us a weird doll, probably from a previous raid.";
+                    addtoInventory(character, "Weird Doll");
+                    cout << "\nPress Enter to continue: ";
+                    cin.get();
+                    cin.ignore();
                     // gain experience
                     break;
                 }
@@ -1323,12 +1329,7 @@ Quest quest2(Hero& character, Monster& monsters)
             }
 
         } while (true);
-        cout << "\nAfter guessing all the challenges, the bandit spares our life and also guides our hero\n"
-            "to Bandit hideout. As a weird gesture, the bandit gives us a weird doll, probably from a previous raid.";
-        addtoInventory(character, "Weird Doll");
-        cout << "\nPress Enter to continue: ";
-        cin.get();
-        cin.ignore();
+       
         cout << "\nAfter finally reaching the hideout, our hero prepares themselves to eliminate all the bandits!";
         cout << "\nPress Enter to continue: ";
         cin.get();
@@ -1376,48 +1377,48 @@ Quest quest2(Hero& character, Monster& monsters)
             cin >> user_guess;
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             if (user_guess >= 1 && user_guess <= 100)
-{
-    if (user_guess == correct_combination)
-    {
-        cout << "\nSuccessful! You may proceed quietly.\n";
-        break;
-    }
-    else
-    {
-        counter--;
-        if (counter == 0)
-        {
-            cout << "\nOut of Tries! You've triggered a silent alarm.\n" << endl;
-            cout << "\nDeal with the bandits!" << endl;
-            system("pause");
-            quest = battle_quest2(character, monsters);
-            if (quest.exitQuest)
             {
-                return quest;
+                if (user_guess == correct_combination)
+                {
+                    cout << "\nSuccessful! You may proceed quietly.\n";
+                    break;
+                }
+                else
+                {
+                    counter--;
+                    if (counter == 0)
+                    {
+                        cout << "\nOut of Tries! You've triggered a silent alarm.\n" << endl;
+                        cout << "\nDeal with the bandits!" << endl;
+                        system("pause");
+                        quest = battle_quest2(character, monsters);
+                        if (quest.exitQuest)
+                        {
+                            return quest;
+                        }
+                        cout << "\nBandit: Reinforcements are coming! Proceed with caution.\n";
+                        quest = battle_quest2(character, monsters);
+                        if (quest.exitQuest)
+                        {
+                            return quest;
+                        }
+                        break;
+                    }
+                    else if (user_guess < correct_combination)
+                    {
+                        cout << "Try a bit higher!";
+                    }
+                    else if (user_guess > correct_combination)
+                    {
+                        cout << "Try a bit lower!";
+                    }
+                    cout << "\nYou have " << counter << " tries remaining. ";
+                }
             }
-            cout << "\nBandit: Reinforcements are coming! Proceed with caution.\n";
-            quest = battle_quest2(character, monsters);
-            if (quest.exitQuest)
+            else
             {
-                return quest;
+                cout << "Invalid input. Please enter a number between 1 and 100.\n";
             }
-            break;
-           }
-         else if (user_guess < correct_combination)
-         {
-            cout << "Try a bit higher!";
-         }
-         else if (user_guess > correct_combination)
-         {
-            cout << "Try a bit lower!";
-         }
-        cout << "\nYou have " << counter << " tries remaining. ";
-     }
-}
-else
-{
-    cout << "Invalid input. Please enter a number between 1 and 100.\n";
-}
         } while (true);
         cout << "\nAfter picking the lock, our hero sneaks up on the bandit leader, catching him off guard!";
         cout << "\nSlay the leader once and for all." << endl;
@@ -1718,7 +1719,7 @@ Quest quest3(Hero& character, Monster& monsters)
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         if (path_choice == 'L' || path_choice == 'l')
-		{
+        {
             rightPath = false;
             break;
         }
@@ -1731,10 +1732,9 @@ Quest quest3(Hero& character, Monster& monsters)
         {
             cout << "Invalid choice. Please select either L or R: ";
             cin.clear();
-            
+
         }
-    }
-	while (true);
+    } while (true);
 
     if (rightPath == true)
     {
@@ -1757,7 +1757,7 @@ Quest quest3(Hero& character, Monster& monsters)
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
             if (decision == 'C' || decision == 'c')
-			 {
+            {
                 cout << "\nOur hero bravely confronts the creature, ready for a battle!";
                 cin.get();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -1930,7 +1930,7 @@ Quest quest3(Hero& character, Monster& monsters)
             cin >> story_choice;
             if (story_choice == 'y' || story_choice == 'Y')
             {
-                cout << "\nIn the heart of Teraxia, an ancient land veiled in mystery, stands the Forbidden Templea relic of forgotten power.\n"
+                cout << "\nIn the heart of Teraxia, an ancient land veiled in mystery, stands the Forbidden TempleÂa relic of forgotten power.\n"
                     "Once tended by the Eldarans, a civilization attuned to magic and nature, the temple now whispers secrets lost to time.";
 
                 cout << "\n\nLegends speak of an artifact within, the Heartstone, a crystal pulsating with the essence of the land. Guarded\n"
@@ -1987,8 +1987,7 @@ Quest quest3(Hero& character, Monster& monsters)
                     gainExperience(character, 150);
                     break;
                 }
-            }
-			while (true);
+            } while (true);
             cout << endl;
             system("pause");
 
@@ -2110,7 +2109,7 @@ Quest quest3(Hero& character, Monster& monsters)
         {
             cout << "\nYou got the first correct!";
             cout << "\nHere comes the second riddle.";
-            cout << "\n->What is 7 x 7 � 7 + 7 ?";
+            cout << "\n->What is 7 x 7  7 + 7 ?";
             cout << "\n->State your answer: ";
             cin >> answer;
             if (answer == 49)
@@ -2248,7 +2247,7 @@ Quest battle_quest3(Hero& character, Monster& monsters)
                 character.health_points -= monsters.monsterDamage;
             }
             if (character.damage >= monsters.monsterHealth)
-			 {
+            {
                 monsters.monsterHealth = 0;
             }
             else
@@ -2258,8 +2257,8 @@ Quest battle_quest3(Hero& character, Monster& monsters)
             cout << "\nYou did " << character.damage << " damage to the monster" << endl;
             cout << "The monster has now " << monsters.monsterHealth << " hp left" << endl;
 
-            if (monsters.monsterHealth == 0) 
-			{
+            if (monsters.monsterHealth == 0)
+            {
                 cout << "You killed the monster!";
                 result.lostBattle = false;
                 gainExperience(character, 200);
@@ -2400,7 +2399,7 @@ Quest bossbattle_3(Hero& character, Monster& monsters)
                 cout << "->\nExiting to main menu...";
                 cin.get();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                result.exitQuest = true ;
+                result.exitQuest = true;
                 result.lostBattle = true;
                 break;
             }
