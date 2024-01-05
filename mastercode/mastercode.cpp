@@ -258,15 +258,9 @@ Hero initializeCharacters()
     {
 
         getline(cin, character.user_name);
-        if (cin.eof())
-        {
-            cout << "\nEOF detected. Please enter username again: ";
-            cin.clear();
-            continue;
-        }
         alphabet_counter = 0;
         spaces = 0;
-        for (int i = 0;i < character.user_name.size();i++)
+        for (int i = 0; i < character.user_name.size(); i++)
         {
             if (isalpha(character.user_name[i])) // checks for alphabet in string
             {
@@ -350,7 +344,7 @@ Hero initializeCharacters()
             }
             else
             {
-                cout << "Select Again:";
+                cout << "Invalid input, Select class again:";
                 cin.clear();
                 cin.ignore(INT_MAX, '\n');
                 confirmation_choice = 'N';
@@ -376,7 +370,7 @@ Hero initializeCharacters()
             }
             else
             {
-                cout << "Select Again:";
+                cout << "Invalid input, Select class again:";
                 cin.clear();
                 cin.ignore(INT_MAX, '\n');
                 confirmation_choice = 'N';
@@ -402,7 +396,7 @@ Hero initializeCharacters()
             }
             else
             {
-                cout << "Select Again:";
+                cout << "Invalid input, Select class again:";
                 cin.clear();
                 cin.ignore(INT_MAX, '\n');
                 confirmation_choice = 'N';
@@ -1311,11 +1305,17 @@ Quest quest2(Hero& character, Monster& monsters)
                 if (counter == 0)
                 {
                     cout << "\nYou failed Bandit's challenge and got killed.";
-                    break;
+                    cout << "Exiting to main menu.....";
+                    cin.get();//Takes input
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    quest.exitQuest = true;
+                    return quest;
                 }
+
                 cout << "\nIncorrect guess, but you can try again!";
                 cout << "\nYou have " << counter << " more tries.";
             }
+
         } while (true);
         cout << "\nAfter guessing all the challenges, the bandit spares our life and also guides our hero\n"
             "to Bandit hideout. As a weird gesture, the bandit gives us a weird doll, probably from a previous raid.";
@@ -1767,8 +1767,7 @@ Quest quest3(Hero& character, Monster& monsters)
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
             }
-        }
-        while (true);
+        } while (true);
 
         if (willFight == true)
         {
@@ -2473,31 +2472,22 @@ bool puzzle_3(Hero& character)
         int orbIndex, pedestalIndex;
         cout << "Choose an orb (1-3) and a pedestal (1-3) to place it on: ";
         cin >> orbIndex >> pedestalIndex;
-
-
         if (orbIndex < 1 || orbIndex > 3 || pedestalIndex < 1 || pedestalIndex > 3)
         {
             cout << "Invalid input. Try again." << endl;
             continue;
         }
-
         orbIndex--;
         pedestalIndex--;
-
-
         if (pedestalsOccupied[pedestalIndex])
         {
             cout << "Pedestal already occupied. Try again." << endl;
             continue;
         }
-
-
         pedestalsOccupied[pedestalIndex] = true;
-
         if (orbIndex != pedestalIndex)
         {
             cout << "Imbalance detected. Resetting puzzle." << endl;
-
             for (int i = 0; i < 3; ++i)
             {
                 orbsPlaced[i] = false;
@@ -2506,12 +2496,9 @@ bool puzzle_3(Hero& character)
         }
         else
         {
-
             orbsPlaced[orbIndex] = true;
         }
     }
-
     cout << "Congratulations! The puzzle is solved. The path forward is revealed." << endl;
     return true;
 }
-
