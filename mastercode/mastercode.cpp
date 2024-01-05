@@ -258,6 +258,12 @@ Hero initializeCharacters()
     {
 
         getline(cin, character.user_name);
+        if (cin.eof())
+        {
+            cout << "\nEOF detected. Please enter username again: ";
+            cin.clear();
+            continue;
+        }
         alphabet_counter = 0;
         spaces = 0;
         for (int i = 0; i < character.user_name.size(); i++)
@@ -656,7 +662,7 @@ Quest quest_1(Hero& character, Monster& monsters)
         system("pause");
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-
+        
         cout << "\nAfter take guidance from the stranger, our Hero finally make their way out of the Forbidden Forest\n"
             "Soon after leaving the Forest, our Hero spots a strange bunker. Out of curiosity, our Hero enters the temple\n"
             "Not later, our Hero realizes it's a trap laid by the Leviathans!";
@@ -1369,55 +1375,49 @@ Quest quest2(Hero& character, Monster& monsters)
             int user_guess;
             cin >> user_guess;
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            if (cin.good())
+            if (user_guess >= 1 && user_guess <= 100)
+{
+    if (user_guess == correct_combination)
+    {
+        cout << "\nSuccessful! You may proceed quietly.\n";
+        break;
+    }
+    else
+    {
+        counter--;
+        if (counter == 0)
+        {
+            cout << "\nOut of Tries! You've triggered a silent alarm.\n" << endl;
+            cout << "\nDeal with the bandits!" << endl;
+            system("pause");
+            quest = battle_quest2(character, monsters);
+            if (quest.exitQuest)
             {
-                if (user_guess == correct_combination)
-                {
-                    cout << "\nSuccessfull! You may proceed quietly.\n";
-                    break;
-                }
-                else if (user_guess != correct_combination)
-                {
-                    if (user_guess > 0 && user_guess <= 100)
-                    {
-                        counter--;
-                        if (counter == 0)
-                        {
-                            cout << "\nOut of Tries! You've triggered a silent alarm.\n" << endl;
-                            cout << "\nDeal with the bandits!" << endl;
-                            system("pause");
-                            quest = battle_quest2(character, monsters);
-                            if (quest.exitQuest)
-                            {
-                                return quest;
-                            }
-                            cout << "\nBandit: Reinforcements are coming! Proceed with caution.\n";
-                            quest = battle_quest2(character, monsters);
-                            if (quest.exitQuest)
-                            {
-                                return quest;
-                            }
-                            break;
-                        }
-                    }
-                }
-                if (user_guess < correct_combination)
-                {
-                    cout << "Try a bit higher!";
-                }
-                else if (user_guess > correct_combination)
-                {
-                    cout << "Try a bit lower!";
-                }
-                cout << "\nYou have " << counter << " tries remaining. ";
+                return quest;
             }
-            else
+            cout << "\nBandit: Reinforcements are coming! Proceed with caution.\n";
+            quest = battle_quest2(character, monsters);
+            if (quest.exitQuest)
             {
-                cout << "Invalid input. Please stop playing around....";
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                continue;
+                return quest;
             }
+            break;
+           }
+         else if (user_guess < correct_combination)
+         {
+            cout << "Try a bit higher!";
+         }
+         else if (user_guess > correct_combination)
+         {
+            cout << "Try a bit lower!";
+         }
+        cout << "\nYou have " << counter << " tries remaining. ";
+     }
+}
+else
+{
+    cout << "Invalid input. Please enter a number between 1 and 100.\n";
+}
         } while (true);
         cout << "\nAfter picking the lock, our hero sneaks up on the bandit leader, catching him off guard!";
         cout << "\nSlay the leader once and for all." << endl;
@@ -1697,13 +1697,14 @@ Quest quest3(Hero& character, Monster& monsters)
 
     cout << "\nPress Enter to continue: ";
     cin.get();
-    cin.ignore();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
     cout << "\nOur hero sets out on their journey, asking the local townsfolk for the\n"
         "direction of the Forbidden Temple. Although extremely warned by all people\n"
         "our hero remains resilient and devotes their life to exposing the mystery of the\n"
         "Forbidden Temple";
     cout << "\nPress Enter to continue: ";
-    getline(cin, dummy);
+    cin.get();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
     cout << "\nAfter entering the forest which faced heavy rain, it was filled with puddles of\n"
         "muddy water. It was extremely hard to move in such conditions. But determined\n"
@@ -1714,7 +1715,10 @@ Quest quest3(Hero& character, Monster& monsters)
     cout << "\nWhich path do you want to pick, Left or Right (L/R): ";
     do {
         cin >> path_choice;
-        if (path_choice == 'L' || path_choice == 'l') {
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        if (path_choice == 'L' || path_choice == 'l')
+		{
             rightPath = false;
             break;
         }
@@ -1727,9 +1731,10 @@ Quest quest3(Hero& character, Monster& monsters)
         {
             cout << "Invalid choice. Please select either L or R: ";
             cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            
         }
-    } while (true);
+    }
+	while (true);
 
     if (rightPath == true)
     {
@@ -1751,13 +1756,18 @@ Quest quest3(Hero& character, Monster& monsters)
             cin >> decision;
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-            if (decision == 'C' || decision == 'c') {
+            if (decision == 'C' || decision == 'c')
+			 {
                 cout << "\nOur hero bravely confronts the creature, ready for a battle!";
+                cin.get();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 willFight = true;
                 break;
             }
             else if (decision == 'S' || decision == 's') {
                 cout << "\nOur hero decides to take a stealthy approach, attempting to sneak past the creature.";
+                cin.get();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 willFight = false;
                 break;
             }
@@ -1765,7 +1775,6 @@ Quest quest3(Hero& character, Monster& monsters)
             {
                 cout << "Invalid choice. Please select either C or S: ";
                 cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
             }
         } while (true);
 
@@ -1838,6 +1847,7 @@ Quest quest3(Hero& character, Monster& monsters)
             cout << "\nThere are only 2 chances, otherwise our hero will be killed!";
             cout << "\nPress Enter to continue: ";
             cin.get();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             string riddleguess1, riddleguess2, riddleguess3;
             cout << "Here goes the first riddle!";
             int riddle_chances = 2;
