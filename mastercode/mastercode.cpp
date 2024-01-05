@@ -1,11 +1,11 @@
 #include<iostream>
 #include<string>
-#include<stdlib.h>  //Stores random function
-#include<time.h>    //Initializes time seed
-#include<iomanip>   //Used for spaces (setw)
-#include<limits>    //It considers the first character and ignore the characters till next line
-#include<cctype>    //Used to check alpha, numeric characters
-#include<algorithm> //Used for string operations like random shuffles
+#include<stdlib.h>
+#include<time.h>
+#include<iomanip>
+#include<limits>
+#include<cctype>
+#include<algorithm>
 using namespace std;
 int globalColor; // global variable
 struct Hero
@@ -39,6 +39,7 @@ struct Quest
 };
 
 void setColor(int colorCode);
+void resetColor();
 int chooseColor();
 void setGameColor();
 void displayInstructions();
@@ -156,6 +157,12 @@ void setColor(int colorCode)
     cout << "\033[" << colorCode << "m";
     cin.get();
 }
+
+void resetColor()
+{
+    cout << "\033[0m";
+}
+
 int chooseColor()
 {
     int colorChoice;
@@ -197,7 +204,7 @@ int chooseColor()
     default:
     {
         cout << "Invalid input, try again...." << endl;
-        cin.clear(); //remove error flags
+        cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
         return chooseColor();
     }
@@ -226,6 +233,9 @@ void displayInstructions()
     cout << "\n\nStep into the enchanting realm of Teraxia, where daring adventurers set forth on quests to achieve legendary hero \nstatus. Within this text-based RPG, players craft their characters, traverse the expansive world, partake in battles,\nand conquer quests. With its dynamic storytelling, character development, and an array of quests, the game promises an immersive experience, captivating players in the fantastical landscape.";
     cout << "\n\n--> Press Enter to go to class selection...";
     cin.get();
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
 }
 
 Hero initializeCharacters()
@@ -287,7 +297,7 @@ Hero initializeCharacters()
             else
             {
                 cout << "\n-> Please enter username again: ";
-                cin.clear(); //Removes error flags
+                cin.clear();
                 cin.ignore(INT_MAX, '\n');
             }
         }
@@ -462,7 +472,7 @@ void displayInventory(Hero& character)
     }
     else
     {
-        for (int i = 0; i < character.inventorySize;i++)
+        for (int i = 0; i < character.inventorySize; ++i)
         {
             cout << i + 1 << ". " << character.inventory[i] << "\n";
         }
@@ -921,7 +931,7 @@ Quest quest_1(Hero& character, Monster& monsters)
             {
                 cout << "\n\nIn the mystical land of Terraria, hidden deep within the Celestial Glades, roams a herd of radiant unicorns,\n"
                     "guardians of the purest magic in the realm. These unicorns, adorned with resplendent coats that shimmer like\n"
-                    "the evening sky, are the keepers of the legendary Crystal GroveÂ—a sacred place where crystalline flora emanate\n"
+                    "the evening sky, are the keepers of the legendary Crystal Grove—a sacred place where crystalline flora emanate\n"
                     "a magic that has sustained Terraria for centuries.";
                 gainExperience(character, 25);
             }
@@ -1252,6 +1262,7 @@ Quest quest2(Hero& character, Monster& monsters)
             if (guess_sentence == "teraxia" || guess_sentence == "Teraxia")
             {
                 cout << "\nYou succesfully passed the first challenge.";
+                // put gain experience here
                 cout << "\nIt is time for the last challenge: " << endl;
                 system("pause");
                 string target_word = "death";
@@ -1750,7 +1761,8 @@ Quest quest3(Hero& character, Monster& monsters)
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
             }
-        } while (true);
+        }
+        while (true);
 
         if (willFight == true)
         {
@@ -1771,6 +1783,9 @@ Quest quest3(Hero& character, Monster& monsters)
                     if (battleAttempts == 2)
                     {
                         cout << "\nExiting to main menu...";
+                        cin.get();
+                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
                         return result;
                     }
                     cout << "\nYou can try again! Attempt: " << battleAttempts << "/2";
@@ -1901,7 +1916,7 @@ Quest quest3(Hero& character, Monster& monsters)
             cin >> story_choice;
             if (story_choice == 'y' || story_choice == 'Y')
             {
-                cout << "\nIn the heart of Teraxia, an ancient land veiled in mystery, stands the Forbidden TempleÂ—a relic of forgotten power.\n"
+                cout << "\nIn the heart of Teraxia, an ancient land veiled in mystery, stands the Forbidden Temple—a relic of forgotten power.\n"
                     "Once tended by the Eldarans, a civilization attuned to magic and nature, the temple now whispers secrets lost to time.";
 
                 cout << "\n\nLegends speak of an artifact within, the Heartstone, a crystal pulsating with the essence of the land. Guarded\n"
@@ -2040,14 +2055,16 @@ Quest quest3(Hero& character, Monster& monsters)
 
         cout << "\nPress Enter to continue: ";
         cin.get();
-        cin.ignore();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
         cout << "\nInside the ruins, our hero discovers a series of chambers adorned with faded murals\n"
             "depicting a forgotten civilization. The walls tell a tale of a once-prosperous society that\n"
             "worshipped nature and magic. However, a dark force had descended upon them, leading to\n"
             "their downfall.";
         cout << "\nPress Enter to continue: ";
         cin.get();
-        cin.ignore();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
         cout << "\n\nAs our hero delves deeper into the ruins, they come across a mysterious altar at the center\n"
             "of a grand chamber. On the altar, three elemental orbs are placed - Fire, Water, and Earth.";
 
@@ -2078,7 +2095,7 @@ Quest quest3(Hero& character, Monster& monsters)
         {
             cout << "\nYou got the first correct!";
             cout << "\nHere comes the second riddle.";
-            cout << "\n->What is 7 x 7 Â– 7 + 7 ?";
+            cout << "\n->What is 7 x 7 – 7 + 7 ?";
             cout << "\n->State your answer: ";
             cin >> answer;
             if (answer == 49)
@@ -2363,6 +2380,10 @@ Quest bossbattle_3(Hero& character, Monster& monsters)
             if (character.health_points <= 0)
             {
                 cout << "You lost the battle!";
+                cout << "-> Exiting to main menu...";
+                cin.get();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
                 result.lostBattle = true;
                 break;
             }
