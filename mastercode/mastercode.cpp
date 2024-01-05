@@ -1987,7 +1987,8 @@ Quest quest3(Hero& character, Monster& monsters)
                     gainExperience(character, 150);
                     break;
                 }
-            } while (true);
+            }
+			while (true);
             cout << endl;
             system("pause");
 
@@ -2109,7 +2110,7 @@ Quest quest3(Hero& character, Monster& monsters)
         {
             cout << "\nYou got the first correct!";
             cout << "\nHere comes the second riddle.";
-            cout << "\n->What is 7 x 7 Â– 7 + 7 ?";
+            cout << "\n->What is 7 x 7 – 7 + 7 ?";
             cout << "\n->State your answer: ";
             cin >> answer;
             if (answer == 49)
@@ -2246,7 +2247,8 @@ Quest battle_quest3(Hero& character, Monster& monsters)
             {
                 character.health_points -= monsters.monsterDamage;
             }
-            if (character.damage >= monsters.monsterHealth) {
+            if (character.damage >= monsters.monsterHealth)
+			 {
                 monsters.monsterHealth = 0;
             }
             else
@@ -2256,7 +2258,8 @@ Quest battle_quest3(Hero& character, Monster& monsters)
             cout << "\nYou did " << character.damage << " damage to the monster" << endl;
             cout << "The monster has now " << monsters.monsterHealth << " hp left" << endl;
 
-            if (monsters.monsterHealth == 0) {
+            if (monsters.monsterHealth == 0) 
+			{
                 cout << "You killed the monster!";
                 result.lostBattle = false;
                 gainExperience(character, 200);
