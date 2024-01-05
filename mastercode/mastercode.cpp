@@ -258,6 +258,12 @@ Hero initializeCharacters()
     {
 
         getline(cin, character.user_name);
+        if (cin.eof())
+        {
+            cout << "\nEOF detected. Please enter username again: ";
+            cin.clear();
+            continue;
+        }
         alphabet_counter = 0;
         spaces = 0;
         for (int i = 0;i < character.user_name.size();i++)
@@ -931,7 +937,7 @@ Quest quest_1(Hero& character, Monster& monsters)
             {
                 cout << "\n\nIn the mystical land of Terraria, hidden deep within the Celestial Glades, roams a herd of radiant unicorns,\n"
                     "guardians of the purest magic in the realm. These unicorns, adorned with resplendent coats that shimmer like\n"
-                    "the evening sky, are the keepers of the legendary Crystal Grove—a sacred place where crystalline flora emanate\n"
+                    "the evening sky, are the keepers of the legendary Crystal GroveÂ—a sacred place where crystalline flora emanate\n"
                     "a magic that has sustained Terraria for centuries.";
                 gainExperience(character, 25);
             }
@@ -1916,7 +1922,7 @@ Quest quest3(Hero& character, Monster& monsters)
             cin >> story_choice;
             if (story_choice == 'y' || story_choice == 'Y')
             {
-                cout << "\nIn the heart of Teraxia, an ancient land veiled in mystery, stands the Forbidden Temple—a relic of forgotten power.\n"
+                cout << "\nIn the heart of Teraxia, an ancient land veiled in mystery, stands the Forbidden TempleÂ—a relic of forgotten power.\n"
                     "Once tended by the Eldarans, a civilization attuned to magic and nature, the temple now whispers secrets lost to time.";
 
                 cout << "\n\nLegends speak of an artifact within, the Heartstone, a crystal pulsating with the essence of the land. Guarded\n"
@@ -2095,7 +2101,7 @@ Quest quest3(Hero& character, Monster& monsters)
         {
             cout << "\nYou got the first correct!";
             cout << "\nHere comes the second riddle.";
-            cout << "\n->What is 7 x 7 – 7 + 7 ?";
+            cout << "\n->What is 7 x 7 Â– 7 + 7 ?";
             cout << "\n->State your answer: ";
             cin >> answer;
             if (answer == 49)
