@@ -1850,7 +1850,7 @@ Quest quest3(Hero& character, Monster& monsters)
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             string riddleguess1, riddleguess2, riddleguess3;
             cout << "Here goes the first riddle!";
-            int riddle_chances = 2;
+            int riddle_chances = 3;
             do
             {
                 cout << "\n\n\033[3m#1: I speak without a mouth and hear without ears.\n"
@@ -1888,7 +1888,6 @@ Quest quest3(Hero& character, Monster& monsters)
                             }
                             cout << "Wrong answer! Try again.";
                             cout << "\nYou have one last chance!" << endl;
-                            system("pause");
                             continue;
                         }
                     }
@@ -2395,10 +2394,10 @@ Quest bossbattle_3(Hero& character, Monster& monsters)
             if (character.health_points <= 0)
             {
                 cout << "You lost the battle!";
-                cout << "-> Exiting to main menu...";
+                cout << "->\nExiting to main menu...";
                 cin.get();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
+                result.exitQuest = true ;
                 result.lostBattle = true;
                 break;
             }
